@@ -3,13 +3,12 @@ import React,{useState,useEffect} from "react";
 import { Col, Row,Container } from "react-bootstrap";
 import Product from "../Components/Product.jsx";
 const HomeScreen = () => {
-  
+
   const [products , setProducts] = useState([]);
 
   useEffect(()=>{
     const fetch = async()=>{
       let {data} = await axios.get('product/all');
-      console.log(data);
       setProducts([...data.productData]);
     }
     fetch();

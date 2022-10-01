@@ -1,25 +1,27 @@
-const express =require('express');
-const productData = require('../Data/product');
+import express from 'express';
+import asyncHandler from 'express-async-handler';
+import productModel from '../Model/productModel.js';
 const productRoute = express.Router();
 
-
-productRoute.get('/all',(req,res)=>{
+productRoute.get('/all',asyncHandler( async (req,res)=>{
+    const allProduct = await productModel.find({});
     res.json({
-        productData
+        allProduct
     })
-})
+}))
 
-productRoute.get('/:id',(req,res)=>{
+productRoute.get('/:id', asyncHandler(async (req,res)=>{
     const id = req.params.id;
     if(id){
-        const product = productData.find((p)=>p._id === id);
+        const product = await productModel.findById(id);
         if(product){
-            res.json({product})
+            res.json({product});
         }else{
-            res.json({message:'no product match'})
+            res.json({message:'no product match'});
         }
     }else{
         res.json({message:"Something went wrong"});
     }
-})
-module.exports=productRoute;
+}))
+
+export default productRoute;
