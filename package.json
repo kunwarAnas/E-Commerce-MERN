@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "node -r dotenv/config Backend/index",
-    "server": "nodemon -r dotenv/config Backend/index",
+    "server": "npx nodemon --delay 500ms -r dotenv/config Backend/index",
     "client": "npm start --prefix Frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node -r dotenv/config Backend/seeder",
@@ -17,9 +17,11 @@
   "dependencies": {
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.2"
   },
   "devDependencies": {

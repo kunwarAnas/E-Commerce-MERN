@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs'
 dotenv.config();
 
 // const db_link = process.env.MONGO_URL;
@@ -34,6 +35,10 @@ const userSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+userSchema.methods.matchPassword = async function(enteredPassword){
+  return await bcrypt.compare(enteredPassword,this.password);
+}
 
 const userModel = mongoose.model("userModel", userSchema, "users");
 
