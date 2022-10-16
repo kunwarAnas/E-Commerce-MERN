@@ -6,6 +6,7 @@ const login = asyncHandler(async (req,res)=>{
     const {email , password} = req.body;
     if(email && password){
         const user = await userModel.findOne({email});
+        //console.log(user);
         if(user && (await user.matchPassword(password))){
             const token = jwt.sign({id:user._id},process.env.SECRET);
             //res.cookie('LoginCookie',token, { httpOnly: true });
