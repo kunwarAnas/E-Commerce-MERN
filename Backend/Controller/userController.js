@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 
 const login = asyncHandler(async (req,res)=>{
     const {email , password} = req.body;
+    console.log('login called');
     if(email && password){
         const user = await userModel.findOne({email});
         //console.log(user);
@@ -21,6 +22,9 @@ const login = asyncHandler(async (req,res)=>{
             res.status(401)
             throw new Error('inavlid credentials')
         }
+    }else{
+        res.status(400);
+        throw new Error('please enter email and password')
     }
 })
 
