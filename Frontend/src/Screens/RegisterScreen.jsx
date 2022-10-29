@@ -5,18 +5,19 @@ import {useDispatch, useSelector} from 'react-redux';
 import Message from '../Components/Message'
 import Loader from '../Components/Loader'
 //import {Loader} from '../Components/Loader'
-import {login, Login} from '../Actions/userAction'
+import {register} from '../Actions/userAction'
 import { useState } from 'react';
 import FormContainer from '../Components/FormContainer';
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [name, setName] = useState('');
     //const location = useLocation();
     const redirect= window.location.search ? window.location.search.split('=')[1]:'/';
     const dispatch = useDispatch();
     const userLogin = useSelector(state=>state.userLogin);
-    console.log(userLogin);
     const {loading,error,userInfo} = userLogin;
     const navigate =  useNavigate();
     useEffect(()=>{
@@ -27,7 +28,7 @@ const LoginScreen = () => {
 
     const submitHandler =(e)=>{
         e.preventDefault();
-        dispatch(login(email,password));
+        dispatch(register(name,email,password));
     }
   return (
     <FormContainer>
@@ -67,4 +68,4 @@ const LoginScreen = () => {
   )
 }
 
-export default LoginScreen 
+export default RegisterScreen 
