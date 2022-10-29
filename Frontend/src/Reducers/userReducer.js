@@ -9,7 +9,7 @@ export const userLoginReducer = (state={},action)=>{
         case STRING.USER_LOGIN_FAIL:
             return {loading:false, error:action.payload};
         case STRING.USER_LOGOUT:
-            return {}
+            return {};
         default:
             return state;
     }
